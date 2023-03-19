@@ -1,0 +1,7 @@
+.content {
+  display: flex;
+
+  &__item {
+    flex: 0 0 50%;
+  }
+}

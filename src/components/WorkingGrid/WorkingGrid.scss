@@ -1,0 +1,10 @@
+.working {
+  background: #ededfe;
+  padding: 25px 30px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}

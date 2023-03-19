@@ -1,0 +1,15 @@
+.header {
+  padding: 20px 30px;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #e4e6f1;
+
+  &__title {
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    letter-spacing: 0.02em;
+    text-align: left;
+  }
+}

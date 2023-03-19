@@ -1,0 +1,16 @@
+.toolbar {
+  padding: 30px;
+  border-right: solid;
+  border-width: 1px;
+  border-color: #e4e6f1;
+
+  &__list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    width: calc(50% - 5px);
+  }
+}
