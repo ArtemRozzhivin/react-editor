@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import { deleteItem } from '../../redux/Pattern/slice';
 import { ItemType } from '../../redux/Pattern/types';
+import { useAppDispatch } from '../../redux/store';
 
-const WorkingItem: React.FC<ItemType> = ({ type, image }) => {
+const WorkingItem: React.FC<ItemType> = ({ id, type, image }) => {
+  const dispatch = useAppDispatch();
   const [isActive, setIsActive] = useState(false);
 
   const onCopy = () => {};
+
+  const onDelete = () => {
+    dispatch(deleteItem(id));
+  };
 
   return (
     <div onClick={() => setIsActive(true)} className={isActive ? 'item item-active' : 'item'}>
@@ -59,7 +66,7 @@ const WorkingItem: React.FC<ItemType> = ({ type, image }) => {
                 />
               </svg>
             </div>
-            <div className="item__delete">
+            <button onClick={onDelete} className="item__delete">
               <svg
                 width="15"
                 height="15"
@@ -71,7 +78,7 @@ const WorkingItem: React.FC<ItemType> = ({ type, image }) => {
                   fill="white"
                 />
               </svg>
-            </div>
+            </button>
           </div>
         </div>
       )}
