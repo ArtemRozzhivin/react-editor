@@ -23,9 +23,21 @@ const PatternSlice = createSlice({
       }
       state.pattern = copyPattern;
     },
+
+    copyItem: (state, action: PayloadAction<ItemType>) => {
+      let copyPattern = state.pattern;
+      const newItem = action.payload;
+
+      copyPattern.splice(newItem.id, 0, newItem);
+
+      for (let i = 0; i < copyPattern.length; i++) {
+        copyPattern[i].id = i;
+      }
+      state.pattern = copyPattern;
+    },
   },
 });
 
-export const { addItem, deleteItem } = PatternSlice.actions;
+export const { addItem, deleteItem, copyItem } = PatternSlice.actions;
 
 export default PatternSlice.reducer;

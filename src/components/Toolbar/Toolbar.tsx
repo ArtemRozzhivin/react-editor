@@ -7,7 +7,7 @@ import paragraph from '../../assets/text-align-left.svg';
 import image from '../../assets/image.svg';
 import { useAppDispatch } from '../../redux/store';
 import { addItem } from '../../redux/Pattern/slice';
-import { ItemType, ToolbarType } from '../../redux/Pattern/types';
+import { ToolbarType } from '../../redux/Pattern/types';
 
 const toolbar: ToolbarType[] = [
   { type: 'Headline', image: headline },

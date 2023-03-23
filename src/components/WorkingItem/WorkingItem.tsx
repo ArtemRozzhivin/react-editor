@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { deleteItem } from '../../redux/Pattern/slice';
+import { copyItem, deleteItem } from '../../redux/Pattern/slice';
 import { ItemType } from '../../redux/Pattern/types';
 import { useAppDispatch } from '../../redux/store';
 
-const WorkingItem: React.FC<ItemType> = ({ id, type, image }) => {
+const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
   const dispatch = useAppDispatch();
   const [isActive, setIsActive] = useState(false);
 
-  const onCopy = () => {};
+  const onCopy = () => {
+    dispatch(copyItem({ id, info, type, image }));
+  };
 
   const onDelete = () => {
     dispatch(deleteItem(id));
@@ -51,7 +53,7 @@ const WorkingItem: React.FC<ItemType> = ({ id, type, image }) => {
           </div>
 
           <div className="item__control">
-            <div className="item__copy">
+            <div onClick={onCopy} className="item__copy">
               <svg
                 width="15"
                 height="15"
