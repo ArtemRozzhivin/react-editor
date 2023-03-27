@@ -2,13 +2,17 @@ import React from 'react';
 import './ImageItem.scss';
 
 interface ImageItemType {
-  image: string;
+  children: string;
 }
 
-const ImageItem: React.FC<ImageItemType> = ({ image }) => {
+const ImageItem: React.FC<ImageItemType> = ({ children }) => {
   return (
     <div className="image">
-      <img className="image__item" src={image} alt="img" />
+      {children ? (
+        <img className="image__item" src={children} alt="Image" />
+      ) : (
+        <div>Картинка не завантажена!</div>
+      )}
     </div>
   );
 };

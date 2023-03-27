@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { copyItem, deleteItem } from '../../redux/Pattern/slice';
+import { copyItem, deleteItem, editItem } from '../../redux/Pattern/slice';
 import { ItemType } from '../../redux/Pattern/types';
 import { useAppDispatch } from '../../redux/store';
 
 const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
   const dispatch = useAppDispatch();
   const [isActive, setIsActive] = useState(false);
+  const [isInfo, setIsInfo] = useState(info);
 
   const onCopy = () => {
     dispatch(copyItem({ id, info, type, image }));
@@ -13,6 +14,11 @@ const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
 
   const onDelete = () => {
     dispatch(deleteItem(id));
+  };
+
+  const onEdit = (value: string) => {
+    dispatch(editItem({ id, info: value }));
+    setIsInfo(value);
   };
 
   return (
@@ -92,7 +98,7 @@ const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
 
       {isActive && (
         <div className="item__edit">
-          <input className="item__input" />
+          <input value={isInfo} onChange={(e) => onEdit(e.target.value)} className="item__input" />
         </div>
       )}
     </div>

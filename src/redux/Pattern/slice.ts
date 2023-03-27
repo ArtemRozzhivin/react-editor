@@ -23,7 +23,6 @@ const PatternSlice = createSlice({
       }
       state.pattern = copyPattern;
     },
-
     copyItem: (state, action: PayloadAction<ItemType>) => {
       let copyPattern = state.pattern;
       const newItem = action.payload;
@@ -35,9 +34,19 @@ const PatternSlice = createSlice({
       }
       state.pattern = copyPattern;
     },
+    editItem: (state, action: PayloadAction<{ id: number; info: string }>) => {
+      const item = state.pattern.find((item) => item.id === action.payload.id);
+
+      if (item) {
+        item.info = action.payload.info;
+      }
+    },
+    // moveUp: (state, action: PayloadAction<ItemType>) => {
+    //   const item = state.pattern.find((item) => item.id === action.payload.id - 1);
+    // },
   },
 });
 
-export const { addItem, deleteItem, copyItem } = PatternSlice.actions;
+export const { addItem, deleteItem, copyItem, editItem } = PatternSlice.actions;
 
 export default PatternSlice.reducer;
