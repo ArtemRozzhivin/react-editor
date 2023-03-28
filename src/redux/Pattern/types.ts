@@ -3,7 +3,7 @@ export interface PatternSliceType {
 }
 
 export type ItemType = {
-  id: number;
+  id: string;
   type: string;
   info: string;
   image: string;

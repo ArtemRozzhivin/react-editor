@@ -1,7 +1,11 @@
 .content {
   display: flex;
 
-  &__item {
-    flex: 0 0 50%;
+  &__working {
+    flex: 1 1 40%;
+  }
+
+  &__frame {
+    flex: 1 1 60%;
   }
 }

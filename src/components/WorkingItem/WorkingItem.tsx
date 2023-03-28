@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { copyItem, deleteItem, editItem } from '../../redux/Pattern/slice';
+import { copyItem, deleteItem, editItem, moveDown, moveUp } from '../../redux/Pattern/slice';
 import { ItemType } from '../../redux/Pattern/types';
 import { useAppDispatch } from '../../redux/store';
 
@@ -21,12 +21,20 @@ const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
     setIsInfo(value);
   };
 
+  const onMoveUp = () => {
+    dispatch(moveUp({ id, info, type, image }));
+  };
+
+  const onMoveDown = () => {
+    dispatch(moveDown({ id, info, type, image }));
+  };
+
   return (
     <div onClick={() => setIsActive(true)} className={isActive ? 'item item-active' : 'item'}>
       {isActive && (
         <div className="item__panel">
           <div className="item__order">
-            <div className="item__down">
+            <div onClick={onMoveDown} className="item__down">
               <svg
                 width="11"
                 height="14"
@@ -41,7 +49,7 @@ const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
                 />
               </svg>
             </div>
-            <div className="item__up">
+            <div onClick={onMoveUp} className="item__up">
               <svg
                 width="11"
                 height="14"

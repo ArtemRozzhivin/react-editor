@@ -6,10 +6,10 @@ import './Content.scss';
 const Content: React.FC = () => {
   return (
     <div className="content">
-      <div className="content__item">
+      <div className="content__working">
         <WorkingGrid />
       </div>
-      <div className="content__item">
+      <div className="content__frame">
         <Frame />
       </div>
     </div>

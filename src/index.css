@@ -88,5 +88,6 @@ body._lock {
 
 .wrapper {
   background: #fff;
+  height: 100%;
   border-radius: 20px;
 }

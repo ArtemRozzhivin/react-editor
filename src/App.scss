@@ -1,9 +1,11 @@
 .app {
   padding: 20px;
+  height: 100vh;
 
   &__main {
     display: flex;
   }
   &__content {
+    width: 100%;
   }
 }
