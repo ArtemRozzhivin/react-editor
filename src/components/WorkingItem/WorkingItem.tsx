@@ -3,9 +3,24 @@ import { copyItem, deleteItem, editItem, moveDown, moveUp } from '../../redux/Pa
 import { ItemType } from '../../redux/Pattern/types';
 import { useAppDispatch } from '../../redux/store';
 
-const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
+interface WorkingItemType {
+  id: string;
+  info: string;
+  type: string;
+  image: string;
+  isActive: string;
+  setIsActive: (value: string) => void;
+}
+
+const WorkingItem: React.FC<WorkingItemType> = ({
+  id,
+  info,
+  type,
+  image,
+  isActive,
+  setIsActive,
+}) => {
   const dispatch = useAppDispatch();
-  const [isActive, setIsActive] = useState(false);
   const [isInfo, setIsInfo] = useState(info);
 
   const onCopy = () => {
@@ -30,8 +45,8 @@ const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
   };
 
   return (
-    <div onClick={() => setIsActive(true)} className={isActive ? 'item item-active' : 'item'}>
-      {isActive && (
+    <div onClick={() => setIsActive(id)} className={isActive === id ? 'item item-active' : 'item'}>
+      {isActive === id && (
         <div className="item__panel">
           <div className="item__order">
             <div onClick={onMoveDown} className="item__down">
@@ -42,8 +57,8 @@ const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M4.875 10.6162V0.249992H6.125V10.6162L10.0581 6.68312L10.9419 7.56687L5.5 13.0087L0.0581284 7.56687L0.94188 6.68312L4.875 10.6162Z"
                   fill="white"
                 />
@@ -57,8 +72,8 @@ const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M6.125 3.38376V13.75H4.875V3.38376L0.941871 7.31688L0.0581207 6.43313L5.5 0.991257L10.9419 6.43313L10.0581 7.31688L6.125 3.38376Z"
                   fill="white"
                 />
@@ -75,8 +90,8 @@ const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M10 10V12.5C10 13.2202 9.47018 13.75 8.75 13.75H2.5C1.77982 13.75 1.25 13.2202 1.25 12.5V6.25C1.25 5.52982 1.77982 5 2.5 5H5V2.5C5 1.77982 5.52982 1.25 6.25 1.25H12.5C13.2202 1.25 13.75 1.77982 13.75 2.5V8.75C13.75 9.47018 13.2202 10 12.5 10H10ZM8.75 10H6.25C5.52982 10 5 9.47018 5 8.75V6.25H2.5V12.5H8.75V10ZM6.25 2.5V8.75H12.5V2.5H6.25Z"
                   fill="white"
                 />
@@ -104,7 +119,7 @@ const WorkingItem: React.FC<ItemType> = ({ id, info, type, image }) => {
       </div>
       <div className="item__title">{type}</div>
 
-      {isActive && (
+      {isActive === id && (
         <div className="item__edit">
           <input value={isInfo} onChange={(e) => onEdit(e.target.value)} className="item__input" />
         </div>

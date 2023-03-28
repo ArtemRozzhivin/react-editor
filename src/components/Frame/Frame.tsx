@@ -30,7 +30,9 @@ const Frame: React.FC = () => {
     <div className="frame">
       <div className="frame__list">
         {pattern.map((item) => (
-          <div className="frame__item">{renderItem(item)}</div>
+          <div key={item.id} className="frame__item">
+            {renderItem(item)}
+          </div>
         ))}
       </div>
     </div>
