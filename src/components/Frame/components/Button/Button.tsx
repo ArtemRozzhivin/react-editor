@@ -9,7 +9,11 @@ interface ButtonType {
 const Button: React.FC<ButtonType> = ({ children }) => {
   return (
     <button className="button">
-      {children ? <div className="button__text">{children}</div> : <div>Ви ще не ввели вміст!</div>}
+      {children ? (
+        <div className="button__text">{children}</div>
+      ) : (
+        <div className="button__text">Empty</div>
+      )}
     </button>
   );
 };

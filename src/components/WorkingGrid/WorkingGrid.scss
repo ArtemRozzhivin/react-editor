@@ -2,6 +2,11 @@
   background: #ededfe;
   padding: 25px 30px;
   height: 100%;
+
+  &-active {
+    background: #effeed;
+  }
+
   &__list {
     display: flex;
     flex-direction: column;

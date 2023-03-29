@@ -9,9 +9,9 @@ const ImageItem: React.FC<ImageItemType> = ({ children }) => {
   return (
     <div className="image">
       {children ? (
-        <img className="image__item" src={children} alt="Image" />
+        <img className="image__item" src={children} alt="Image not found" />
       ) : (
-        <div>Картинка не завантажена!</div>
+        <div>Empty</div>
       )}
     </div>
   );

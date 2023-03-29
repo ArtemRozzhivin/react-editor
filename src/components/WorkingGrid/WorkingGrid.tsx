@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectPattern } from '../../redux/Pattern/select';
-import { setIsActive } from '../../redux/Pattern/slice';
+import { addItem, setIsActive } from '../../redux/Pattern/slice';
 import { ItemType } from '../../redux/Pattern/types';
 import { useAppDispatch } from '../../redux/store';
 import WorkingItem from '../WorkingItem/WorkingItem';
 import './WorkingGrid.scss';
 
 const WorkingGrid: React.FC = () => {
+  const [isOverActive, setIsOverActive] = useState(false);
   const dispatch = useAppDispatch();
   const { pattern, isActiveItem } = useSelector(selectPattern);
 
@@ -15,8 +16,28 @@ const WorkingGrid: React.FC = () => {
     dispatch(setIsActive(value));
   };
 
+  const onDropItem = (e: React.DragEvent<HTMLDivElement>) => {
+    const item = JSON.parse(e.dataTransfer.getData('item'));
+    dispatch(addItem(item));
+    setIsOverActive(false);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    setIsOverActive(true);
+    e.preventDefault();
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    setIsOverActive(false);
+    e.preventDefault();
+  };
+
   return (
-    <div className="working">
+    <div
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={(e) => onDropItem(e)}
+      className={isOverActive ? 'working working-active' : 'working'}>
       <div className="working__list">
         {pattern.length ? (
           pattern.map((item) => (
@@ -29,7 +50,7 @@ const WorkingGrid: React.FC = () => {
             </div>
           ))
         ) : (
-          <div className="working__empty">Шаблон не створено</div>
+          <div className="working__empty">Template not created</div>
         )}
       </div>
     </div>
