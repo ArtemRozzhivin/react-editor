@@ -1,5 +1,6 @@
 export interface PatternSliceType {
   pattern: ItemType[];
+  isActiveItem: string;
 }
 
 export type ItemType = {

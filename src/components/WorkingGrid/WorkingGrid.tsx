@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectPattern } from '../../redux/Pattern/select';
+import { setIsActive } from '../../redux/Pattern/slice';
+import { ItemType } from '../../redux/Pattern/types';
+import { useAppDispatch } from '../../redux/store';
 import WorkingItem from '../WorkingItem/WorkingItem';
 import './WorkingGrid.scss';
 
 const WorkingGrid: React.FC = () => {
-  const { pattern } = useSelector(selectPattern);
-  const [isActiveItem, setIsActiveItem] = useState('');
+  const dispatch = useAppDispatch();
+  const { pattern, isActiveItem } = useSelector(selectPattern);
 
-  useEffect(() => {
-    if (pattern.length) {
-      setIsActiveItem(pattern[pattern.length - 1].id);
-    }
-  }, [pattern]);
+  const setIsActiveItem = (value: string) => {
+    dispatch(setIsActive(value));
+  };
 
   return (
     <div className="working">

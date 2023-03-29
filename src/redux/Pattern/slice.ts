@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const initialState: PatternSliceType = {
   pattern: [],
+  isActiveItem: '',
 };
 
 const PatternSlice = createSlice({
@@ -11,7 +12,9 @@ const PatternSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<ToolbarType>) => {
-      state.pattern = [...state.pattern, { id: uuidv4(), info: '', ...action.payload }];
+      const newItem = { id: uuidv4(), info: '', ...action.payload };
+      state.pattern = [...state.pattern, newItem];
+      state.isActiveItem = newItem.id;
     },
     deleteItem: (state, action: PayloadAction<string>) => {
       state.pattern = state.pattern.filter((item) => item.id !== action.payload);
@@ -25,6 +28,7 @@ const PatternSlice = createSlice({
         copiedItem,
         ...state.pattern.slice(index + 1),
       ];
+      state.isActiveItem = copiedItem.id;
     },
     editItem: (state, action: PayloadAction<{ id: string; info: string }>) => {
       const index = state.pattern.findIndex((pattern) => pattern.id === action.payload.id);
@@ -59,9 +63,14 @@ const PatternSlice = createSlice({
         state.pattern = newPattern;
       }
     },
+
+    setIsActive: (state, action: PayloadAction<string>) => {
+      state.isActiveItem = action.payload;
+    },
   },
 });
 
-export const { addItem, deleteItem, copyItem, editItem, moveUp, moveDown } = PatternSlice.actions;
+export const { addItem, deleteItem, copyItem, editItem, moveUp, moveDown, setIsActive } =
+  PatternSlice.actions;
 
 export default PatternSlice.reducer;
