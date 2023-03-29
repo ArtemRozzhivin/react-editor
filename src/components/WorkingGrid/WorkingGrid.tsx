@@ -12,6 +12,20 @@ const WorkingGrid: React.FC = () => {
   const dispatch = useAppDispatch();
   const { pattern, isActiveItem } = useSelector(selectPattern);
 
+  const handleDocumentClick = (event: any) => {
+    const clickedItem = (event.target as HTMLElement).closest('.item');
+    if (!clickedItem) {
+      dispatch(setIsActive(''));
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleDocumentClick);
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
+
   const setIsActiveItem = (value: string) => {
     dispatch(setIsActive(value));
   };
@@ -34,6 +48,7 @@ const WorkingGrid: React.FC = () => {
 
   return (
     <div
+      onClick={handleDocumentClick}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={(e) => onDropItem(e)}

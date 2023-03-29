@@ -3,6 +3,8 @@ import { copyItem, deleteItem, editItem, moveDown, moveUp } from '../../redux/Pa
 import { ItemType } from '../../redux/Pattern/types';
 import { useAppDispatch } from '../../redux/store';
 
+import '../BlockItem/BlockItem.scss';
+
 interface WorkingItemType {
   id: string;
   info: string;
